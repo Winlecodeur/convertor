@@ -1,0 +1,35 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>convertisseur</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <div class="convert">
+        <h1>Convertiseur PDF /  Word By Win Alfani  </h1>
+        <form action="{% url  'convert'  %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="doc">
+                <label for="document" class="doc-title">Choisissez un fichier : </label>
+            <input type="file" class="doc-input" id="document" name="document" accept=".pdf, .docx, .doc" required ><br><br>
+           
+            </div>
+           <div class="choose">
+            <label for="conversion_type">Type de conversion : </label><br>
+        
+            <label for="pdf_to_word">PDF vers Word</label>
+            <input type="radio" id="pdf_to_word" name="conversion_type" value="pdf_to_word" required/>
+        
+            <label for="word_to_pdf">Word vers PDF  </label>
+                <input type="radio" id="word_to_pdf" name="conversion_type" value="word_to_pdf" required/>
+           </div>
+            <button type="submit"  class="btn">Convertir</button>
+        </form>
+    </div>
+</body>
+</html>

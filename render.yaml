@@ -1,0 +1,26 @@
+services:
+  - name: django-app
+    type: web
+    runtime: python
+    region: oregon  # Choisissez votre région (ex: frankfurt, oregon)
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate"
+    startCommand: "gunicorn nom_de_votre_projet.wsgi:application"
+
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+
+      - key: DATABASE_URL
+        fromDatabase:
+          name: django-db
+          property: connectionString
+
+      - key: PYTHON_VERSION
+        value: 3.12
+
+    plan: free  # Peut être 'free' ou 'starter' ou 'standard'
+
+databases:
+  - name: django-db
+    region: oregon  # Doit correspondre à la région du service
+    plan: free
